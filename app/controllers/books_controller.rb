@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  
   def index
     if params[:search].present? && params[:subject].present?
       @books = Book.joins(:subjects).where("books.title LIKE ? AND subjects.id = ?", "%#{params[:search]}%", params[:subject]).paginate(page: params[:page], per_page: 10)
