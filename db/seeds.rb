@@ -1,8 +1,6 @@
 require 'json'
 require 'open-uri'
-
 require 'csv'
-
 
 # Fetch books data from API
 books_url = 'https://gutendex.com/books/'
@@ -61,8 +59,6 @@ records.each do |record|
     Author.create(author_name: author_name, birth_year: birth_year)
   end
 end
-
-
 
 
 csv_path = File.join(File.dirname(__FILE__), 'book.csv')
