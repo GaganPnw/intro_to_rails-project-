@@ -171,28 +171,6 @@ SmarterCSV.process('book.csv', options) do |chunk|
 end
 
 
-# Create readers using Faker gem
-200.times do
-  Reader.create(
-    name: Faker::Name.name
-  )
-end
 
 
-# Assign readers to books
-Book.all.each do |book|
-
-    reader = Reader.all.sample
-    book.readers << reader
-
-
-    # Generate random values for reader data
-    reader.update(
-      books_read: rand(10..100),
-      books_reading: rand(10..100),
-      books_saved: rand(10..100)
-    )
-    book.save!
-
-end
 
