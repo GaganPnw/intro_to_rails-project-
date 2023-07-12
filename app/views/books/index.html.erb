@@ -1,3 +1,4 @@
+
 <%= form_with(url: books_path, method: "get") do |f| %>
   <%= f.text_field :search, value: @search_query, placeholder: "Search books..." %>
   <%= f.select :subject, options_for_select(@subjects.map { |s| [s.subject_name, s.id] }, params[:subject]), prompt: "Select a subject" %>
