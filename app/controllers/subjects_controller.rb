@@ -1,7 +1,9 @@
 class SubjectsController < ApplicationController
+  
   def index
     @subjects = Subject.paginate(page: params[:page], per_page: 10)
   end
+  
   def show
     @subject = Subject.find(params[:id])
     @books = @subject.books
@@ -20,7 +22,5 @@ class SubjectsController < ApplicationController
       }
     end
   end
-
-
 
 end
