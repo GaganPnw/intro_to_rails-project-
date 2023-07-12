@@ -1,0 +1,13 @@
+<h1>Subjects</h1>
+
+<ul>
+  <% @subjects.each do |subject| %>
+    <li>
+      <a href="<%= subject_books_path(subject) %>">
+        <%= subject.subject_name %>
+      </a>
+      Count: <%= subject.books.count %>
+    </li>
+  <% end %>
+</ul>
+<%= will_paginate @books %>

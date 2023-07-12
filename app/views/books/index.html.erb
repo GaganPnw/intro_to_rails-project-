@@ -1,0 +1,21 @@
+<%= form_with(url: books_path, method: "get") do |f| %>
+  <%= f.text_field :search, value: @search_query, placeholder: "Search books..." %>
+  <%= f.select :subject, options_for_select(@subjects.map { |s| [s.subject_name, s.id] }, params[:subject]), prompt: "Select a subject" %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% if @no_query_message %>
+  <p><%= @no_query_message %></p>
+<% end %>
+
+<ul>
+  <% @books.each do |book| %>
+    <li>
+      <strong>Title:</strong> <%= link_to book.title, book_path(book) %> <br>
+      <strong>Description:</strong> <%= book.description %> <br>
+      <strong>Language:</strong> <%= book.language %> <br>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate @books %>

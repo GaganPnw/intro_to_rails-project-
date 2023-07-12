@@ -1,0 +1,19 @@
+<h1><%= @subject.subject_name %></h1>
+
+<p>Count of Associated Books: <%= @books.count %></p>
+
+<h2>Associated Books</h2>
+
+<% if @books.present? %>
+  <ul>
+    <% @books.each do |book| %>
+      <li>
+      <strong>Title:</strong> <%= link_to book.title, book_path(book) %> <br>
+      <strong>Description:</strong> <%= book.description %> <br>
+      <strong>Language:</strong> <%= book.language %> <br>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No books associated with this subject.</p>
+<% end %>

@@ -1,0 +1,198 @@
+require 'json'
+require 'open-uri'
+
+# Fetch books data from API
+books_url = 'https://gutendex.com/books/'
+books_serialized = URI.open(books_url).read
+books_data = JSON.parse(books_serialized)
+
+books = books_data['results']
+# Create books
+books.each do |book_data|
+  authors = book_data['authors']
+
+  book = Book.create(
+    title: book_data['title'],
+    description: Faker::Quote.famous_last_words,
+    language: book_data['languages'].join(', '),
+    downloads: book_data['download_count']
+  )
+
+  authors.each do |author_data|
+    author = Author.find_or_create_by(author_name: author_data['name'])
+    book.authors << author
+  end
+
+  book_data['subjects'].each do |subject_name|
+    subject = Subject.find_or_create_by(subject_name: subject_name)
+    book.subjects << subject
+  end
+end
+
+# Fetch subjects data from API
+subjects_url = 'https://gutendex.com/books/'
+subjects_serialized = URI.open(subjects_url).read
+subjects_data = JSON.parse(subjects_serialized)
+subjects = subjects_data['results']
+# Create subjects
+subjects.each do |subject_data|
+  Subject.create(
+    subject_name: subject_data['name']
+  )
+end
+
+
+# Fetch authors data from API
+authors_url = 'https://gutendex.com/books/'
+authors_serialized = URI.open(authors_url).read
+authors_data = JSON.parse(authors_serialized)
+records = authors_data['results']
+
+# Iterate over authors and create records
+records.each do |record|
+  record['authors'].each do |author_data|
+    author_name = author_data['name']
+    birth_year = author_data['birth_year']
+
+    # Create author record
+    Author.create(author_name: author_name, birth_year: birth_year)
+  end
+end
+
+
+# Create readers using Faker gem
+200.times do
+  Reader.create(
+    name: Faker::Name.name
+  )
+end
+
+# Assign readers to books
+Book.all.each do |book|
+
+    reader = Reader.all.sample
+    book.readers << reader
+
+
+    # Generate random values for reader data
+    reader.update(
+      books_read: rand(10..100),
+      books_reading: rand(10..100),
+      books_saved: rand(10..100)
+    )
+    book.save!
+
+end
+
+
+
+require 'json'
+require 'open-uri'
+require 'csv'
+
+
+# Fetch books data from API
+books_url = 'https://gutendex.com/books/'
+books_serialized = URI.open(books_url).read
+books_data = JSON.parse(books_serialized)
+
+books = books_data['results']
+# Create books
+books.each do |book_data|
+  authors = book_data['authors']
+
+  book = Book.create(
+    title: book_data['title'],
+    description: Faker::Quote.famous_last_words,
+    language: book_data['languages'].join(', '),
+    downloads: book_data['download_count']
+  )
+
+  authors.each do |author_data|
+    author = Author.find_or_create_by(author_name: author_data['name'])
+    book.authors << author
+  end
+
+  book_data['subjects'].each do |subject_name|
+    subject = Subject.find_or_create_by(subject_name: subject_name)
+    book.subjects << subject
+  end
+end
+
+# Fetch subjects data from API
+subjects_url = 'https://gutendex.com/books/'
+subjects_serialized = URI.open(subjects_url).read
+subjects_data = JSON.parse(subjects_serialized)
+subjects = subjects_data['results']
+# Create subjects
+subjects.each do |subject_data|
+  Subject.create(
+    subject_name: subject_data['name']
+  )
+end
+
+
+# Fetch authors data from API
+authors_url = 'https://gutendex.com/books/'
+authors_serialized = URI.open(authors_url).read
+authors_data = JSON.parse(authors_serialized)
+records = authors_data['results']
+
+# Iterate over authors and create records
+records.each do |record|
+  record['authors'].each do |author_data|
+    author_name = author_data['name']
+    birth_year = author_data['birth_year']
+
+    # Create author record
+    Author.create(author_name: author_name, birth_year: birth_year)
+  end
+end
+
+
+# Read data from CSV and save in the database using CSV.parse
+csv_text = File.read('book.csv')
+csv = CSV.parse(csv_text, headers: true)
+csv.each do |row|
+  Moulding.create!(row.to_hash)
+end
+
+# Read data from CSV and save in the database using CSV.foreach
+CSV.foreach('book.csv', headers: true) do |row|
+  Moulding.create!(row.to_hash)
+end
+
+# Read data from CSV and save in the database using SmarterCSV
+options = {}
+SmarterCSV.process('book.csv', options) do |chunk|
+  chunk.each do |data_hash|
+    Moulding.create!(data_hash)
+  end
+end
+
+
+# Create readers using Faker gem
+200.times do
+  Reader.create(
+    name: Faker::Name.name
+  )
+end
+
+
+# Assign readers to books
+Book.all.each do |book|
+
+    reader = Reader.all.sample
+    book.readers << reader
+
+
+    # Generate random values for reader data
+    reader.update(
+      books_read: rand(10..100),
+      books_reading: rand(10..100),
+      books_saved: rand(10..100)
+    )
+    book.save!
+
+end
+

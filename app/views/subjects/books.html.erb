@@ -1,0 +1,16 @@
+<h1>Books</h1>
+
+<% if @books.present? %>
+  <ul>
+    <% @books.each do |book| %>
+      <li>
+      <strong>Title:</strong><%= link_to book.title, book_path(book) %>  <br>
+      <strong>Description:</strong> <%= book.description %><br>
+      <strong>Language:</strong> <%= book.language %><br>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No books found.</p>
+<% end %>
+

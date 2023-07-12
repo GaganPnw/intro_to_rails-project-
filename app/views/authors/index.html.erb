@@ -1,0 +1,12 @@
+<h1>Authors</h1>
+
+<ul>
+  <% @authors.each do |author| %>
+    <li>
+      <span><%= link_to author.author_name, author_path(author) %></span>
+      - Number of Books: <%= author.books.count %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate @books %>

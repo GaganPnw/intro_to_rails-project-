@@ -1,0 +1,16 @@
+<h1><%= @book.title %></h1>
+<p><strong>Authors:</strong> <%= @book.authors.pluck(:author_name).join(', ') %></p>
+<p><strong>Subjects:</strong>
+  <% @book.subjects.each do |subject| %>
+    <%= link_to subject.subject_name, subject_path(subject) %>
+    <%= ', ' unless subject == @book.subjects.last %>
+  <% end %>
+</p>
+<p><strong>Description:</strong> <%= @book.description %></p>
+<p><strong>Readers:</strong> <%= @book.readers.count %></p>
+<p><strong>Downloads:</strong> <%= @book.downloads %></p>
+
+<h2>Reader Information</h2>
+<p><strong>Readers Currently Reading:</strong> <%= @book.readers.where(books_reading: @book.id).count %></p>
+<p><strong>Readers Saved to Read Later:</strong> <%= @book.readers.where(books_saved: @book.id).count %></p>
+<p><strong>Readers Already Read:</strong> <%= @book.readers.where(books_read: @book.id).count %></p>

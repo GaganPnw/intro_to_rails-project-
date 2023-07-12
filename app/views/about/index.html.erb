@@ -1,0 +1,85 @@
+
+  <h1>About Page</h1>
+
+  <h2>Description</h2>
+  <p>
+  The database is designed to store information about books, authors, subjects, and readers. It integrates data from multiple sources, including an API and a CSV file.
+  </p>
+  <p>
+  Books:
+  </p>
+  <p>
+  Each book has a title, description, language, and download count.
+  The book data is fetched from the 'https://gutendex.com/books/' API endpoint.
+  Books may have one or more authors and multiple subjects.
+  The book descriptions are randomly generated using the Faker gem.
+  </p>
+  <p>
+  Authors:
+  </p>
+  <p>
+
+  Authors have a name and birth year.
+  Author data is fetched from the 'https://gutendex.com/books/' API endpoint.
+  Multiple authors can be associated with a book.
+  </p>
+  <p>
+  Subjects:
+  </p>
+  <p>
+
+  Subjects represent different categories or topics related to books.
+  Subject data is fetched from the 'https://gutendex.com/books/' API endpoint.
+  Each subject has a unique name.
+  Multiple subjects can be associated with a book.
+  </p>
+  <p>
+  Readers:
+  </p>
+  <p>
+
+  Readers are individuals who read books.
+  Each reader has a name and tracks the number of books read, books currently being read, and saved books.
+  Reader records are randomly created using the Faker gem.
+  Each book can be assigned to one reader.
+  </p>
+  <p>
+  CSV Integration:
+  </p>
+  <p>
+
+  The 'book.csv' file is read and processed using the CSV library.
+  Additional books are created based on the data in the CSV file.
+  The CSV file contains information about book titles, authors, subjects, downloads, languages, and author birth years.
+  Books from the CSV file are associated with authors and subjects as per the existing associations in the database.
+  </p>
+  <p>
+  the sources for the database include:
+  </p>
+  <p>
+  Gutendex API:
+  </p>
+  <p>
+
+  'https://gutendex.com/books/' endpoint for fetching book data.
+  'https://gutendex.com/books/' endpoint for fetching subject data.
+  'https://gutendex.com/books/' endpoint for fetching author data.
+  </p>
+  <p>
+  CSV File:
+  </p>
+  <p>
+
+  'book.csv' file containing additional book data.
+  </p>
+  <p>
+  Faker Gem:
+  </p>
+  <p>
+
+  Used to generate random data for book descriptions and reader names.
+  These sources collectively provide a diverse range of book information and reader data, ensuring a rich and varied database content.
+  </p>
+  <h2>ERD</h2>
+  <img src="<%= asset_path('intro_to_rails.jpg') %>" alt="Intro to Rails ERD">
+
