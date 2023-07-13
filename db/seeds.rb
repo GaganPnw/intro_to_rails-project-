@@ -35,6 +35,7 @@ subjects_url = 'https://gutendex.com/books/'
 subjects_serialized = URI.open(subjects_url).read
 subjects_data = JSON.parse(subjects_serialized)
 subjects = subjects_data['results']
+
 # Create subjects
 subjects.each do |subject_data|
   Subject.create(
@@ -90,7 +91,6 @@ CSV.foreach(csv_path, headers: true) do |row|
   end
 end
 
-
 # Create readers using Faker gem
 200.times do
   Reader.create(
@@ -103,7 +103,6 @@ Book.all.each do |book|
 
     reader = Reader.all.sample
     book.readers << reader
-
 
     # Generate random values for reader data
     reader.update(
