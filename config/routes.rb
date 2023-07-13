@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'about', to: 'about#index'
   get 'subjects/:id/books', to: 'subjects#books', as: 'subject_books'
 
-
   resources :books, only: [:index, :show]
   resources :subjects do
     member do
